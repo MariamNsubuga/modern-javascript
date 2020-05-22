@@ -450,7 +450,7 @@ greet();
 
 
 //function expression - setting a function to a variable
-//expression - anytime we set a variable to something whether a string or function or number : thats is called an expression. we always put a semicolon at the end.
+//expression - anytime we set a variable to something whether a string or function or number : that is called an expression. we always put a semicolon at the end.
 //
 //use a const so fn doesnot change
 //function expression declaration
@@ -568,7 +568,7 @@ console.log(resultOne);
 //how methods are invoked and
 //where they are defined
 //
-//method is invoked used a dot . format
+//method is invoked using a dot . format
 const theName = 'lailah';
 //toUpperCase() method on a value
 let resultTwo = theName.toUpperCase();
@@ -617,7 +617,7 @@ people.forEach((person, index) => {
 
 //can create a callback fn alone & just pass it in the forEach()
 const logPerson = (person, index) => {
-	console.log(`${index} - hello  ${'person'}`); //used template strings
+	console.log(`${index} - hello  ${person}`); //used template strings
 };
 //call the callback function
 people.forEach(logPerson);
@@ -653,13 +653,305 @@ ul.innerHTML = theHtml;
 
 
 
+			//Objects
+//Objects in real life have properties & things they can do...
+// 
+//Phone has:-
+//properties 
+//-color -size -model
+//things it can do(methods)
+// -ring -take a picture -play music
+//
+//user object
+//properties
+//-email -username -gender
+//methods(functions)
+//-login -logout
+//
+//blog object
+//properties
+//-title  -content  -author
+//methods
+//-publish  -unpublish  -delete
+//
+//
+//
+//Creating objects using object literals
+//we use {} to create objects
+let theuser = {
+	name:'Crystal',
+	age: 30,
+	location:'Kampala',
+	email: 'crystal@gmail.com',
+	blogs: ['Why pizza?', '10 things to eat in the morning'],
+
+	//create a blog array property with objects
+	//ie data from databases is in the onject array format(array of objexts)
+	theblogs: [
+		{ title: 'Why pizza?', likes:30 },
+		{ title: '10 things to eat in the morning', likes:50 }
+	],
+	
+	//add methods - use the key-value
+	//nameofthemehod : function() {//do something}
+	login: function(){
+		console.log(`User has logged in`);
+	},
+	//this is a regular function
+	logout: function(){
+		console.log('USer has logged out');
+	},
+	//this is also a regular function
+	settings() {
+		console.log(`User profile, username is ${this.name}`);
+	},
+
+	//if we want to display blog content in this function, 
+	//we use this keyword
+	//this keyword if used here refers to this object variable name theuser
+	//this keyword is a context object & it represents the context in which the content code is executed,
+	//depending on how & where its used,its value is going to be used
+	logBlogs: function(){ //used a normal fn - always use a regular fn not arrow fns since this keyword in arrow fns will refer to window ie logBlogs: () =>{ console.log(this); //displays the window} 
+		//eg console.log(this); output theuser object
+		console.log(this);
+		//to display the blogs value, we use this.blogs
+		console.log(this.blogs);
+
+		//to display individual values of a blogs(it is an array), we loop using forEach()
+		console.log(`${this.name} wrote the following blogs:-`);
+		this.blogs.forEach(blog => { //pass a callback fn in the forEach() and blog as a parameter
+			console.log(blog);
+		})
+
+
+		//
+		//
+	},
+
+	//display info in theblogs
+	logTheBlogs() {
+		console.log('The user has written the following blogs: ');
+		this.theblogs.forEach(theblog => {
+			console.log(`This blog ${theblog.title} has  ${theblog.likes} likes`);
+			//console.log(theblog);
+		})	
+	}
+
+
+};
+console.log(theuser); 
+//access a property & redefining using a dot . notation
+console.log(theuser.name);
+//redefine/updating a property
+theuser.age = 35;
+console.log(theuser.age);
+//access a property & redefining using [] notation, name of a key is put in the ''
+console.log(theuser['email']);
+theuser['name'] = 'Lailah G';
+console.log(theuser['name']);
+//using [] notation is essential if you have a variable pointing to the property name
+const key = 'location';
+console.log(theuser[key]); //it is like console.log(theuser['location']);
+
+console.log(typeof theuser);
+
+//call methods using . notation
+theuser.login();
+theuser.logout();
+theuser.settings();
+
+theuser.logBlogs();
+
+theuser.logTheBlogs();
+
+//this keyword in this context, 
+//it outputs the global js property/global context - window
+console.log(this); //output the window's property indow {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+
+
+//18th May 2020 Monday (25th day of Ramadhan)
+//
+//20th May 2020 Wednesday
+//
+//Math object - built-in object in js
+console.log(Math); //gives all Math properties and methods
+console.log(Math.PI); //gives a long decimal value of 3.14
+console.log(Math.E);
+
+const p = 7.7; const q=7.2; 
+console.log(Math.round(p)); //rounds of value of p to the nearest integer
+console.log(Math.round(q));
+
+console.log(Math.floor(p)); //ignores the values after the decimal point
+
+console.log(Math.ceil(q)); //rounds up the nearest integer to 1 irrespective of any number after decimal point ie Math.ceil(q) - 8
+
+console.log(Math.trunc(p)); //ignores the values after decimal point & only takes the integer
+
+//random numbers
+const rand = Math.random();
+//the random number is always between Zero 0 and One 1
+console.log(rand); //gives different values eachtime a page is refreshed
+
+//how to get a random number between 1 and 100
+//use round() then multiply rand variable by 100
+console.log(Math.round(rand * 100));
 
 
 
 
+//Primitive types and Reference Types[difference is how they are used and stored in memory].
+//Primitive types - when we create a primitive value and we assign to a variable, the value is stored in something called a Stack, Stack has limited space & they are quicker
+//-numbers -strings -booleans -null -undefined -symbols
+//Stack & Heap are 2 different types of memory.
+//Reference types - :- if we create Reference type like object literal,arrays,functions - that is stored on Heap, Heap has more space available for bigger and more complex types & they are slower.
+//-all types of objects -object literals -arrays -functions -dates -all other objects
+//
+//when we make an array, it stored in a heap & it makes a reference through a pointer to a Stack 
+//eg const userOne = {name:'LAilah', score:100}
+//object is stored in a heap & this object points to a Stack using the variable name userOne
+//if we create const userTwo = userOne;
+//a new pointer userTwo is formed on the Stack but still use the same Heap value (both Stacks point to the same Heap)
+//if userOne = {name:'LAilah', score:50}, same heap but the score is updated to 50
+
+
+//primitive types
+let scoreOne = 50;
+let scoreTwo = scoreOne;
+console.log(`score one: ${scoreOne}`, `score Two: ${scoreTwo}`);
+//if one is updated, the other doesnt get updated in a Stack
+scoreOne=100;
+console.log(`score one: ${scoreOne}`, `score Two: ${scoreTwo}`); //scoreTwo doesn't change
+
+
+//
+//reference types
+const usersOne = {name:'lailah', age:45};
+const usersTwo = usersOne;
+console.log(usersOne, usersTwo);
+//if one onject is updated, even the other updates because they are pointing to the same objects Heap... 
+usersOne.age = 70; //usersTwo.age = 100;
+console.log(usersOne, usersTwo);
 
 
 
+//Interacting with a browser
+//like:-
+//-adding content to the browser
+//-change CSS styles
+//-can react to user events e.g clicking
+//-cool effects like popups
+//
+//goals
+//- Document Object Model(DOM)
+//- Add, change & delete content
+//- Make a cool pop-up effect in the web page
+//
+//
+//DOM
+//* it is the heart of any kind of webpage manipulation.
+//// It is something created by the browser when a HTML document interacts with it.
+/// 'document' object is the object created  when HTML document is loaded in the browser where the browser creates an object which models the document ('document' object) 
+//
+//get & use the html by using document & CSS selectors
+//use document objects whenever we want to do anything on a webpage
+//querySelector() is one way to grab an element from the DOM
+const par = document.querySelector('p'); //grabs the 1st p tag & ignores the rest
+console.log(par);
+const par1 = document.querySelector('.error');
+console.log(par1);
+const par2 = document.querySelector('div.error');
+console.log(par2);
+const par3 = document.querySelector('body > h1'); //gets the 1st h1 in the body
+console.log(par3);
+//
+//grab multiple elements
+const par4 = document.querySelectorAll('p');//gets all p tags
+console.log(par4); // it gives a NodeList but it isn't an array though we can do some array methods on it
+//loop
+console.log(par4[2]);
+
+
+//getting elemeys by
+//get an element by ID -  document.getElementById('page-title')
+const the_id = document.getElementById('page-title');
+console.log(the_id);
+
+
+//get elements by their class name - document.getElementsByClassName('error')
+const errors = document.getElementsByClassName('error'); //don't put . on the class name
+console.log(errors); //it gives HtmlCollection which is the same as NodeList
+console.log(errors[0]); //we can get a value using index like in arrays 
+//but we can't loop through using a forEach() like in arrays
+
+
+//get an element by their tag name - document.getElementsByTagName('p')
+const p_tag = document.getElementsByTagName('p'); //selects all <p> tags
+console.log(p_tag);
+console.log(p_tag[1]);
+//can't loop through using a forEach() like in arrays
+
+
+//using property - innerText
+console.log(par.innerText);
+////updating the value at the 1st paragraph///
+par.innerText = 'ninjas are awesome';
+
+//for the NodeList, loop through
+par4.forEach(par_4 => {
+	console.log(par_4.innerText);
+	//update(appending) each paragraph
+	par_4.innerText += ', updated all paragraphs';
+});
+
+
+//want to change items in the tag
+const cont = document.querySelector('.content');
+console.log(cont.innerHTML);
+//update(overwrites) the html content
+cont.innerHTML = '<h2>This content is updated & it overwrote the previous</h2>';
+//appending the content
+cont.innerHTML += ' <b>This is appended content</b>';
+
+//eg if we go to a database, get  a list / an array of people & I'm to return an html temoplate of it 
+const the_people = ['lailah', 'Juliana', 'Fanny'];
+the_people.forEach(the_person => {
+	//append that div .content - cont
+	cont.innerHTML += `<h3>${the_person}</h3>`
+});
+
+
+//get and update html attributes eg href, class
+const link = document.querySelector('a');
+//getAttribute('')  setAttribute('') pass atributes in ('')
+console.log(link.getAttribute('href'));
+//setAttribute('attribute', 'the value to update it to');
+//setAttribute -> - overwrites , - updates if it is not there
+link.setAttribute('href', 'https://www.thenetninja.co.uk');
+//change text 
+link.innerText = 'Go to Netninja';
+
+const msg = document.querySelector('p');
+console.log(msg.getAttribute('class'));
+msg.setAttribute('class','success');
+//add a styling through js
+//setAttribute('new attribute','attribute value')
+msg.setAttribute('style','color:green;');
+
+
+//par3.setAttribute('style','margin:50px;'); overwrites other styles
+
+//to append other styles, we use style property in js
+console.log(par3.style); //gives all the style proplerties
+console.log(par3.style.color); //gives orange on <h1>
+
+par3.style.margin = '50px'; //the style property doesn't overwrite the initial styles 
+///////style property is the best way to append styles
+par3.style.color = 'gold'; //overwrites only the color
+//styles like font-size are used as camelCase - fontSize
+par3.style.fontSize = '70px';
+///to delete a style, set the style to an empty string
+par3.style.margin = ''; //removes the margin
 
 
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stylin error and sucess</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<h1>The DOM</h1>
+	<h2 class="sucess">DOM stands for Document Object Model</h2>
+
+	<p class="error">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore 
+	</p>
+
+	<h2>Exercise</h2>
+	<h3>lorem error ipsum</h3>
+	<h3>lorem success ipsum</h3>
+	<h3>lorem error lorem</h3>
+	<h3>lorem error success</h3>
+	<h3>error lorem ipsum</h3>
+	<h3>lorem ipsum lorem</h3>
+	<h3>lorem ipsum error</h3>
+	<h3>success lorem ipsum</h3>
+	
+	<script>
+		const content = document.querySelector('p');
+		//classList - property which gives one / all the classes returned by <p> in content variable
+		//it returns a DOMTokenList
+		console.log(content.classList); //away to get classes an element has  
+
+		//add() - this method adds classes
+		content.classList.add('test');
+		//remove() - this method removes a class(es)
+		content.classList.remove('test','error');
+
+		content.classList.add('success'); //the css on .success works
+
+
+		// eXERCISE.
+		// Make a tag text that has error crimson & tag text that has success limegreen in the <h3>
+
+		//solution
+		const c = document.querySelectorAll('h3');
+		console.log(c);
+		//iterate through since it is a NodeList
+		//use textContent to get all text in a tag
+		//whether the text is on display:none, textContent shows in eg console.log(c.textContent);
+		//
+		//Use includes() to check if a given string is / isn't in a sentence
+		//includes() is a boolean
+		
+		c.forEach(c_h3 => {
+			if(c_h3.textContent.includes('error')) {
+					c_h3.classList.add('error');
+			}else {
+				c_h3.classList.add('success');
+			}
+		});
+
+
+		// HOW TO TOGGLE CLASSES - USE THE toggle()
+		// with toggle(), the 1st time adds a class
+		// yhe second removes the 1st class
+		// 
+		const h2 = document.querySelector('h2');
+		h2.classList.toggle('test');//adds a class
+		h2.classList.toggle('test');//removes  a class
+
+
+	</script>
+
+</body>
+</html>
